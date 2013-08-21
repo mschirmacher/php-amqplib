@@ -549,7 +549,7 @@ class AMQPChannel extends AbstractChannel
     protected function internal_ack_handler($delivery_tag, $multiple, $handler)
     {
         if ($multiple) {
-            $keys = $this->getK_keys_less_or_equal($this->published_messages, $delivery_tag);
+            $keys = $this->get_keys_less_or_equal($this->published_messages, $delivery_tag);
 
             foreach ($keys as $key) {
                 $this->internal_ack_handler($key, false, $handler);
@@ -560,7 +560,7 @@ class AMQPChannel extends AbstractChannel
         }
     }
 
-    protected function getK_keys_less_or_equal(array $array, $value)
+    protected function get_keys_less_or_equal(array $array, $value)
     {
         $keys = array_reduce(
             array_keys($array),
